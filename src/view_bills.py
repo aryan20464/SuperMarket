@@ -23,7 +23,8 @@ def view_bills():
                 print row[ite],
             print "\n" '''
         for row in records:
-            print "%d \t\t %d \t\t\t %-10s \t\t\t %-4.2f \t\t\t %d \t\t\t %-10.2f \n" % (row[0], row[1], row[2], row[3], row[4], row[5])
+            print "%-d \t\t %-d \t\t\t %-10s \t\t\t %-4.2f \t\t\t %-d \t\t\t %-10.2f \n" % \
+                  (row[0], row[1], row[2], row[3], row[4], row[5])
 
     else:
         print " *******Customer Not found ********"
