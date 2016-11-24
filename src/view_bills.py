@@ -30,5 +30,14 @@ def view_bills():
         print " *******Customer Not found ********"
 
 
+def dbase_results_gui(cname):
+    connection_db = sqlite3.connect(D_BASE_URL)
+    csr = connection_db.cursor()
+    records = csr.execute('''select invoice_items.invoice_id, invoice_items.item_id, items.item_name, invoice_items.quantity, items.item_price,
+                        (invoice_items.quantity * items.item_price) as Price from customer join items join invoice_items join invoice
+                         on invoice.invoice_number = invoice_items.invoice_id and invoice.customer_id = customer.id and
+                         items.item_id = invoice_items.item_id and customer.name= (?)
+                         ''', (cname,))
+    return records.fetchall()
 
 
