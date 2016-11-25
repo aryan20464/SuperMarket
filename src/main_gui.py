@@ -8,11 +8,11 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-from view_details import view_items
 from insert_items import insert_items
 from modify_items import modify_items
 from billing import billing_items, view_bills
 from child import Ui_Dialog11
+from view_items_GUI import Ui_ViewItems
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -30,11 +30,17 @@ except AttributeError:
 
 
 class Ui_Dialog(object):
-    def welcome(self):
+    def view_bill_local(self):
         self.welcomeWindow = QtGui.QDialog()
-        self.ui = Ui_Dialog11()
-        self.ui.setupUi(self.welcomeWindow)
+        self.ui1 = Ui_Dialog11()
+        self.ui1.setupUi(self.welcomeWindow)
         self.welcomeWindow.show()
+
+    def view_items_local(self):
+        self.item_window = QtGui.QDialog()
+        self.ui2 = Ui_ViewItems()
+        self.ui2.setupUi(self.item_window)
+        self.item_window.show()
 
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
@@ -77,13 +83,14 @@ class Ui_Dialog(object):
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), Dialog.accept)
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), Dialog.reject)
         #Here Comes the code for button event handling
-        QtCore.QObject.connect(self.pushButton1, QtCore.SIGNAL(_fromUtf8("clicked()")), view_items)
+        QtCore.QObject.connect(self.pushButton1, QtCore.SIGNAL(_fromUtf8("clicked()")), self.view_items_local)
         QtCore.QObject.connect(self.pushButton_2, QtCore.SIGNAL(_fromUtf8("clicked()")), insert_items)
         QtCore.QObject.connect(self.pushButton_3, QtCore.SIGNAL(_fromUtf8("clicked()")), modify_items)
         QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), billing_items)
-        QtCore.QObject.connect(self.pushButton_4, QtCore.SIGNAL(_fromUtf8("clicked()")), view_bills)
-        QtCore.QObject.connect(self.pushButton_5, QtCore.SIGNAL(_fromUtf8("clicked()")), self.welcome)
+        QtCore.QObject.connect(self.pushButton_4, QtCore.SIGNAL(_fromUtf8("clicked()")), self.view_bill_local)
+        QtCore.QObject.connect(self.pushButton_5, QtCore.SIGNAL(_fromUtf8("clicked()")), view_bills)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(_translate("Dialog", "Dialog", None))
@@ -96,8 +103,6 @@ class Ui_Dialog(object):
         self.pushButton_5.setText(_translate("Dialog", "Customer Search", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Dialog", "Billing", None))
 
-    def new_addition(self):
-        self.pushButton_5.setText(_translate("Dialog", "New item", None))
 
 if __name__ == "__main__":
     import sys

@@ -94,25 +94,25 @@ def billing_items():
     fop.write("%s;%d" % ("Total", total_bill))
     fop.close()'''
 
-'''-------------------------------------------MAIN PROGRAM STARTS HERE-----------------------------------------------'''
-
-print '''\n\n*********************\n\tChoice \n*********************\
-\n 1. Insert items \n 2. Billing \n 3. View Items
- 4. View Bills \n 5. Modify Items \n*********************\n'''
-
-choice = int(input("Enter the choice : "))
-
-if choice == 1:
-    insert_items()
-elif choice == 2:
-    view_items()
-    billing_items()
-elif choice == 3:
-    view_items()
-elif choice == 4:
-    view_bills()
-elif choice == 5:
-    modify_items()
+# '''-------------------------------------------MAIN PROGRAM STARTS HERE-----------------------------------------------'''
+#
+# print '''\n\n*********************\n\tChoice \n*********************\
+# \n 1. Insert items \n 2. Billing \n 3. View Items
+#  4. View Bills \n 5. Modify Items \n*********************\n'''
+#
+# choice = int(input("Enter the choice : "))
+#
+# if choice == 1:
+#     insert_items()
+# elif choice == 2:
+#     view_items()
+#     billing_items()
+# elif choice == 3:
+#     view_items()
+# elif choice == 4:
+#     view_bills()
+# elif choice == 5:
+#     modify_items()
 
 
 
