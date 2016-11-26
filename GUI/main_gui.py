@@ -8,7 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-from src.modify_items import modify_items
+from modify_items_GUI import Ui_ModifyItems
 from src.billing import billing_items, view_bills
 from view_bills_GUI import Ui_Dialog11
 from view_items_GUI import Ui_ViewItems
@@ -47,6 +47,12 @@ class Ui_Dialog(object):
         self.ui3 = Ui_InsertItems()
         self.ui3.setupUi(self.insert_window)
         self.insert_window.show()
+
+    def modify_items_local(self):
+        self.modify_window = QtGui.QDialog()
+        self.ui4 = Ui_ModifyItems()
+        self.ui4.setupUi(self.modify_window)
+        self.modify_window.show()
 
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
@@ -91,7 +97,7 @@ class Ui_Dialog(object):
         #Here Comes the code for button event handling
         QtCore.QObject.connect(self.pushButton1, QtCore.SIGNAL(_fromUtf8("clicked()")), self.view_items_local)
         QtCore.QObject.connect(self.pushButton_2, QtCore.SIGNAL(_fromUtf8("clicked()")), self.insert_items_local)
-        QtCore.QObject.connect(self.pushButton_3, QtCore.SIGNAL(_fromUtf8("clicked()")), modify_items)
+        QtCore.QObject.connect(self.pushButton_3, QtCore.SIGNAL(_fromUtf8("clicked()")), self.modify_items_local)
         QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), billing_items)
         QtCore.QObject.connect(self.pushButton_4, QtCore.SIGNAL(_fromUtf8("clicked()")), self.view_bill_local)
         QtCore.QObject.connect(self.pushButton_5, QtCore.SIGNAL(_fromUtf8("clicked()")), view_bills)

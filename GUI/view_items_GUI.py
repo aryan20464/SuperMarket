@@ -9,6 +9,7 @@
 
 from PyQt4 import QtCore, QtGui
 from src.view_details import dbase_results_gui_args
+from modify_items_GUI import *
 
 
 try:
@@ -27,17 +28,43 @@ except AttributeError:
 
 
 class Ui_ViewItems(object):
-
     def dbase_results(self):
         customer_name = self.lineEdit.text()
         allSQLRows = dbase_results_gui_args(customer_name)
         self.tableWidget.setRowCount(len(allSQLRows))  ##set number of rows
-        self.tableWidget.setColumnCount(3)  ## set number of columns
+        self.tableWidget.setColumnCount(4)  ## set number of columns
 
         for x in range(0, len(allSQLRows)):
             r = allSQLRows[x]
             for col in range(0, 3):
+                self.btn_sell = QtGui.QPushButton("Edit")
+                QtCore.QObject.connect(self.btn_sell, QtCore.SIGNAL("clicked()"), self.mod)
                 self.tableWidget.setItem(x, col, QtGui.QTableWidgetItem(str(r[col])))
+                self.tableWidget.setCellWidget(x, 3, self.btn_sell)
+
+    def modify_items_local(self, item_id, item_name, item_price):
+        self.modify_window = QtGui.QDialog()
+        self.ui4 = Ui_ModifyItems()
+        self.ui4.setupUi(self.modify_window)
+        self.ui4.lineEdit_1.setText(item_name)
+        self.ui4.lineEdit_2.setText(item_price)
+        self.ui4.modify_setValues(item_id)
+        self.modify_window.show()
+
+    def mod(self):
+        button = self.tableWidget.focusWidget()
+        index = self.tableWidget.indexAt(button.pos())
+        if index is not None:
+            print index.row()
+        rc = self.tableWidget.rowCount()
+        for row in range(0, rc):
+            if row == index.row():
+                r_index = self.tableWidget.item(row, 0).text()
+                r_index_name = self.tableWidget.item(row, 1).text()
+                r_index_price = self.tableWidget.item(row, 2).text()
+                self.modify_items_local(r_index, r_index_name, r_index_price)
+
+
 
     def clear_text(self):
         self.lineEdit.setText("ALL")
@@ -61,7 +88,7 @@ class Ui_ViewItems(object):
         self.tableWidget = QtGui.QTableWidget(Dialog3)
         self.tableWidget.setGeometry(QtCore.QRect(20, 70, 340, 401))
         self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
-        self.tableWidget.setColumnCount(3)
+        self.tableWidget.setColumnCount(4)
         self.tableWidget.setRowCount(0)
         item = QtGui.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
@@ -69,6 +96,8 @@ class Ui_ViewItems(object):
         self.tableWidget.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(2, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(3, item)
         self.pushButton_1 = QtGui.QPushButton(Dialog3)
         self.pushButton_1.setGeometry(QtCore.QRect(140, 20, 41, 25))
         self.pushButton_1.setObjectName(_fromUtf8("pushButton_1"))
@@ -81,6 +110,7 @@ class Ui_ViewItems(object):
         self.pushButton_3 = QtGui.QPushButton(Dialog3)
         self.pushButton_3.setGeometry(QtCore.QRect(140, 490, 91, 26))
         self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
+
 
         self.retranslateUi3(Dialog3)
         QtCore.QObject.connect(self.pushButton_3, QtCore.SIGNAL("clicked()"), Dialog3.accept)
@@ -96,6 +126,8 @@ class Ui_ViewItems(object):
         item.setText(_translate("Dialog3", "Item Name", None))
         item = self.tableWidget.horizontalHeaderItem(2)
         item.setText(_translate("Dialog3", "Price", None))
+        item = self.tableWidget.horizontalHeaderItem(3)
+        item.setText(_translate("Dialog3", "Modify", None))
         self.pushButton_1.setText(_translate("Dialog3", "Find", None))
         self.pushButton_2.setText(_translate("Dialog3", "Clear", None))
         self.pushButton_3.setText(_translate("Dialog3", "OK", None))

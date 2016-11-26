@@ -25,3 +25,21 @@ def modify_items():
         print "Wrong input"
 
     connection_db.close()
+
+
+def dbase_modify_results_gui(iid, iname, iprice):
+    connection_db = sqlite3.connect(D_BASE_URL)
+    csr = connection_db.cursor()
+    print iid, iname, iprice
+    print type(int(iid)), type(str(iname)), type(int(iprice))
+    try:
+        csr.execute("update items set item_name = ?, item_price = ? where item_id = ?", (str(iname), int(iprice), int(iid)))
+        connection_db.commit()
+        connection_db.close()
+        return "Item Modified"
+    except Exception:
+        connection_db.close()
+        return "Error Occurred"
+
+
+
