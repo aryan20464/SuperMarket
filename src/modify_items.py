@@ -25,4 +25,3 @@ def modify_items():
         print "Wrong input"
 
     connection_db.close()
-

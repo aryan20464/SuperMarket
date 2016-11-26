@@ -8,7 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-from view_details import dbase_results_gui_args
+from src.view_details import dbase_results_gui_args
 
 
 try:
@@ -43,6 +43,17 @@ class Ui_ViewItems(object):
         self.lineEdit.setText("ALL")
         self.dbase_results()
         self.lineEdit.clear()
+
+    # def show_message(self):
+    #     msg = QtGui.QMessageBox()
+    #     msg.setIcon(QtGui.QMessageBox().Information)
+    #     msg.setText("This is a message box")
+    #     msg.setInformativeText("This is additional information")
+    #     msg.setWindowTitle("MessageBox demo")
+    #     msg.setDetailedText("The details are as follows:")
+    #     msg.setStandardButtons(QtGui.QMessageBox().Ok)
+    #     retval = msg.exec_()
+    #     print "value of pressed message box button:", retval
 
     def setupUi(self, Dialog3):
         Dialog3.setObjectName(_fromUtf8("Dialog3"))

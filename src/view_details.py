@@ -1,5 +1,5 @@
 import sqlite3
-from PyQt4 import QtCore, QtGui
+import re
 
 D_BASE_URL = "/home/chakri/SQLite/smarket_db.sqlite"
 
@@ -16,9 +16,11 @@ def view_items():
 def dbase_results_gui_args(item_param):
     connection_db = sqlite3.connect(D_BASE_URL)
     csr = connection_db.cursor()
+    item_param = str(item_param)
+    zx = re.match("[0-9]+", item_param)
     if str(item_param) == "ALL":
         records = csr.execute('''select * from items''')
-    elif len(item_param) == 1:
+    elif zx is not None:
         records = csr.execute('''select * from items where item_id = ?''', (int(item_param),))
     else:
         records = csr.execute('''select * from items where item_name = ?''', (str(item_param),))

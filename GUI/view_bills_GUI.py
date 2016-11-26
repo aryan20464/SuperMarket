@@ -9,7 +9,7 @@
 
 from PyQt4 import QtCore, QtGui
 import sqlite3 as lite
-from view_bills import dbase_results_gui
+from src.view_bills import dbase_results_gui
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8

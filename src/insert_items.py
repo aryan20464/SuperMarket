@@ -15,3 +15,13 @@ def insert_items():
     conn_local.commit()
     if f_choice:
         insert_items()
+    conn_local.close()
+
+
+def insert_items_gui(item_name_gui, item_price_gui):
+    connection_gui = sqlite3.connect(D_BASE_URL)
+    csr_gui = connection_gui.cursor()
+    csr_gui.execute('''INSERT INTO items(item_name, item_price) VALUES (?, ?)''', (str(item_name_gui), int(item_price_gui)))
+    print csr_gui.description
+    connection_gui.commit()
+    connection_gui.close()
