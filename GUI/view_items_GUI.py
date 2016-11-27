@@ -29,8 +29,8 @@ except AttributeError:
 
 class Ui_ViewItems(object):
     def dbase_results(self):
-        customer_name = self.lineEdit.text()
-        allSQLRows = dbase_results_gui_args(customer_name)
+        item_name_or_id = self.lineEdit.text()
+        allSQLRows = dbase_results_gui_args(item_name_or_id)
         self.tableWidget.setRowCount(len(allSQLRows))  ##set number of rows
         self.tableWidget.setColumnCount(4)  ## set number of columns
 

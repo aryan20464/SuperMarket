@@ -1,7 +1,22 @@
 import sqlite3
 import re
+from PyQt4 import QtCore, QtGui
 
 D_BASE_URL = "/home/chakri/SQLite/smarket_db.sqlite"
+
+
+def billing_items_gui(search_key):
+    connection_db = sqlite3.connect(D_BASE_URL)
+    csr = connection_db.cursor()
+    item_param = str(search_key)
+    zx = re.match("[0-9]+", item_param)
+    if len(item_param) == 0:
+        records = csr.execute('''select * from items''')
+    elif zx is not None:
+        records = csr.execute('''select * from items where item_id = ?''', (int(item_param),))
+    else:
+        records = csr.execute('''select * from items where item_name = ?''', (str(item_param),))
+    return records.fetchall()
 
 
 def view_items():
